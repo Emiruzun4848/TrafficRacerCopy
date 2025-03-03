@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public GameOverScene gameOverScene;
+
     public TMP_Text pointText;
     public TMP_Text speedText;
     public TMP_Text moneyText;
@@ -84,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(isGameEnded)
+        if (isGameEnded)
             return;
         speedText.text = $"{((int)playerRb.velocity.z).ToString()} KM/H";
     }
@@ -93,6 +95,12 @@ public class GameManager : MonoBehaviour
         MyAccount.Instance.Money = (int)Money;
         isGameEnded = true;
         PlayerMovement.Instance.CrashedCar();
+        if ((int)point > MyAccount.Instance.HighScore)
+        {
+            MyAccount.Instance.HighScore = (int)point;
+        }
+        gameOverScene.Open();
+        gameOverScene.LoadText($"${money.ToString("N0", new System.Globalization.CultureInfo("de-DE"))}", ((int)point).ToString(), MyAccount.Instance.HighScore.ToString());
 
     }
 }

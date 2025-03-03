@@ -13,6 +13,7 @@ public class AudioScript : MonoBehaviour
             Instance = this;
         }
         playerMovement = GameObject.FindAnyObjectByType<PlayerMovement>();
+        carSource.volume = MyAccount.Instance.carVolume;
     }
     private void Start()
     {
