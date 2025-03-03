@@ -1,43 +1,56 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCar : MonoBehaviour
 {
+    private CarData carData;
+    public PlayerMovement playerMovement;
+    public GameObject pointUpgrade;
+    public static List<Transform> triggeredCars = new List<Transform>();
+    public float pointKatsayisi = 1f;
+    public float moneyRate = 1f;
 
-    bool carCrash;
-    Rigidbody rb;
-    Vector2 input;
-    public Vector3 rbVelocity;
-    public int maxSpeed;
-    public float speedIncreaseRate;
+    
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-    }
+        playerMovement = GetComponent<PlayerMovement>();
+        carData=MyAccount.Instance.SelectedCar;
+        UpdateCarPrefab();
 
-    private void Start()
-    {
-        carCrash = false;
     }
-
-    void Update()
+    private void Update()
     {
-        if (carCrash)
-            return;
-        input.x = Input.GetAxisRaw("Horizontal") * speedIncreaseRate * 5;
-        input.y = Input.GetAxis("Vertical") * Mathf.Pow(speedIncreaseRate+1, 2)  - 1f;
+        #region PointSystem
+        GameManager.Instance.Point += Time.deltaTime * pointKatsayisi * playerMovement.rb.velocity.z;
+        #endregion
+        GameManager.Instance.Money += Time.deltaTime * playerMovement.rb.velocity.z * moneyRate * 0.01f;
     }
-    private void FixedUpdate()
+    void UpdateCarPrefab()
     {
-        Vector3 vel = rb.velocity;
-        vel.x += input.x;
-        vel.z += input.y;
-        if (vel.magnitude > maxSpeed)
+        foreach (Transform item in transform)
         {
-            vel = vel.normalized * maxSpeed;
+            Destroy(item.gameObject);
         }
-        vel.z = Mathf.Clamp(vel.z, 0, Mathf.Infinity);
-        vel.x = Mathf.Lerp(vel.x, 0, 0.2f);
-        rb.velocity = vel;
-        rbVelocity = rb.velocity;
+
+        Instantiate(carData.carPrefab, transform.position, transform.rotation, transform);
+        playerMovement.maxSpeed = carData.maxSpeed[Mathf.Clamp(carData.UpgradeLevel, 0, carData.maxSpeed.Length - 1)];
+        playerMovement.speedIncreaseRate = carData.speedIncreaseRate[Mathf.Clamp(carData.UpgradeLevel,0, carData.speedIncreaseRate.Length - 1)];
+        playerMovement.horizontalSpeedIncreaseRate = carData.horizontalSpeedIncreaseRate[Mathf.Clamp(carData.UpgradeLevel, 0, carData.horizontalSpeedIncreaseRate.Length - 1)];
+        playerMovement.maxHorizontalSpeed = carData.maxHorizontalSpeed[Mathf.Clamp(carData.UpgradeLevel, 0, carData.maxHorizontalSpeed.Length - 1)];
+        playerMovement.breakRate = carData.breakRate[Mathf.Clamp(carData.UpgradeLevel, 0, carData.breakRate.Length - 1)];
+
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if (triggeredCars.Contains(other.transform) || playerMovement.rb.velocity.z < 80f)
+            return;
+        triggeredCars.Add(other.transform);
+        GameManager.Instance.Point += 125f;
+        GameManager.Instance.Money +=25f;
+        Vector3 iPos = (other.transform.position + transform.position) / 2;
+        iPos.y = 10f;
+        GameObject iDelete = Instantiate(pointUpgrade, iPos, pointUpgrade.transform.rotation);
+        Destroy(iDelete, 0.5f);
+    }
+
 }

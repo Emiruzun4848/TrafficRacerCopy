@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -14,10 +15,10 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         offset = transform.position - playerTransform.position;
+        offset.x = 0;
     }
     private void LateUpdate()
     {
-        transform.position = playerTransform.position + offset;
+        transform.position = (Vector3.forward * playerTransform.position.z) + offset;
     }
-
 }

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef701b7ad9066941a5bcc445bbed564, type: 3}
+  m_Name: Car1
+  m_EditorClassIdentifier: 
+  cost: 0
+  isBought: 1
+  maxSpeed: 78000000820000008c00000096000000
+  speedIncreaseRate:
+  - 0.5
+  - 0.75
+  - 0.9
+  - 1
+  maxHorizontalSpeed: 2d00000032000000370000003c000000
+  horizontalSpeedIncreaseRate:
+  - 2
+  - 2.2
+  - 2.3
+  - 2.4
+  breakRate:
+  - 1.1
+  - 1.5
+  - 2
+  - 2.5
+  UpgradeLevel: 0
+  UpgradeCost: e8030000dc050000d0070000
+  carPrefab: {fileID: 6023939918273827440, guid: 49b491032ce08fd4787b49dac14d7b90, type: 3}
