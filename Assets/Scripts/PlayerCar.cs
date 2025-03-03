@@ -10,11 +10,11 @@ public class PlayerCar : MonoBehaviour
     public float pointKatsayisi = 1f;
     public float moneyRate = 1f;
 
-    
+
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        carData=MyAccount.Instance.SelectedCar;
+        carData = MyAccount.Instance.SelectedCar;
         UpdateCarPrefab();
 
     }
@@ -31,10 +31,13 @@ public class PlayerCar : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+        Vector3 pos = transform.position;
+        pos.y = carData.carPrefab.transform.position.y;
+        pos.z = carData.carPrefab.transform.position.z;
+        Instantiate(carData.carPrefab, pos, carData.carPrefab.transform.rotation, transform);
 
-        Instantiate(carData.carPrefab, transform.position, transform.rotation, transform);
         playerMovement.maxSpeed = carData.maxSpeed[Mathf.Clamp(carData.UpgradeLevel, 0, carData.maxSpeed.Length - 1)];
-        playerMovement.speedIncreaseRate = carData.speedIncreaseRate[Mathf.Clamp(carData.UpgradeLevel,0, carData.speedIncreaseRate.Length - 1)];
+        playerMovement.speedIncreaseRate = carData.speedIncreaseRate[Mathf.Clamp(carData.UpgradeLevel, 0, carData.speedIncreaseRate.Length - 1)];
         playerMovement.horizontalSpeedIncreaseRate = carData.horizontalSpeedIncreaseRate[Mathf.Clamp(carData.UpgradeLevel, 0, carData.horizontalSpeedIncreaseRate.Length - 1)];
         playerMovement.maxHorizontalSpeed = carData.maxHorizontalSpeed[Mathf.Clamp(carData.UpgradeLevel, 0, carData.maxHorizontalSpeed.Length - 1)];
         playerMovement.breakRate = carData.breakRate[Mathf.Clamp(carData.UpgradeLevel, 0, carData.breakRate.Length - 1)];
@@ -46,7 +49,7 @@ public class PlayerCar : MonoBehaviour
             return;
         triggeredCars.Add(other.transform);
         GameManager.Instance.Point += 125f;
-        GameManager.Instance.Money +=25f;
+        GameManager.Instance.Money += 25f;
         Vector3 iPos = (other.transform.position + transform.position) / 2;
         iPos.y = 10f;
         GameObject iDelete = Instantiate(pointUpgrade, iPos, pointUpgrade.transform.rotation);
