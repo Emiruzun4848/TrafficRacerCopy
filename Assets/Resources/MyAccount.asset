@@ -15,5 +15,5 @@ MonoBehaviour:
   Money: 771
   HighScore: 1964
   SelectedCar: {fileID: 11400000, guid: e0f6af47f44a8d24690bb49a4038f429, type: 2}
-  SelectedInputType: 0
+  SelectedInputType: 2
   carVolume: 1

@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 public class TiltControl : MonoBehaviour
 {
     public float tiltValue = 0f; // -1, 0, 1 değerlerini alacak
-    public float b=0f;
+    public float b = 0f;
     public void BreakClick(bool y)
     {
-        b = y?-1:1;
+        b = y ? -1 : 1;
     }
 
     void Update()
@@ -21,14 +21,22 @@ public class TiltControl : MonoBehaviour
 
             PlayerMovement.Instance.input = new Vector2(tiltValue, b);
         }
+        else
+        {
+            Debug.Log("Yokk!!! ");
+
+        }
     }
     private void OnEnable()
     {
+        if(InputManager.Instance != null)
         InputManager.Instance.gameObject.SetActive(false);
     }
     void OnDisable()
     {
+        if(InputManager.Instance != null)
         InputManager.Instance.gameObject.SetActive(true);
         PlayerMovement.Instance.input = Vector2.zero;
     }
+
 }

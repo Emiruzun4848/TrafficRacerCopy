@@ -16,6 +16,9 @@ public class Settings : MonoBehaviour
             case 2:
                 MyAccount.Instance.SelectedInputType = InputType.Button;
                 break;
+            case 3:
+                MyAccount.Instance.SelectedInputType = InputType.Tilt;
+                break;
         }
     }
     public void ChangeSound(float b)

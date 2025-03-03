@@ -39,16 +39,26 @@ public class GameManager : MonoBehaviour
         {
             inputs.GetChild(0).gameObject.SetActive(false);
             inputs.GetChild(1).gameObject.SetActive(false);
+            inputs.GetChild(2).gameObject.SetActive(false);
         }
         else if (type == InputType.JoyStick)
         {
             inputs.GetChild(0).gameObject.SetActive(true);
             inputs.GetChild(1).gameObject.SetActive(false);
+            inputs.GetChild(2).gameObject.SetActive(false);
         }
-        else
+        else if (type == InputType.Button)
         {
             inputs.GetChild(0).gameObject.SetActive(false);
             inputs.GetChild(1).gameObject.SetActive(true);
+            inputs.GetChild(2).gameObject.SetActive(false);
+        }
+        else
+        {
+
+            inputs.GetChild(0).gameObject.SetActive(false);
+            inputs.GetChild(1).gameObject.SetActive(false);
+            inputs.GetChild(2).gameObject.SetActive(true);
         }
     }
     private void Start()

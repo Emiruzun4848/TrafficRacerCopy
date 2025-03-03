@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public enum InputType{
     Keyboard,
     JoyStick,
-    Button
+    Button,
+    Tilt
 }
 [CreateAssetMenu(fileName = "Account", menuName = "Account", order = 0)]
 public class MyAccount : ScriptableObject
