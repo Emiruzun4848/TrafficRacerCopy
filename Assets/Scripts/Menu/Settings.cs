@@ -18,8 +18,8 @@ public class Settings : MonoBehaviour
                 break;
         }
     }
-    public void ChangeSound(int a, float b)
+    public void ChangeSound(float b)
     {
-        MyAccount.Instance.Volume[a] = b;
+        MyAccount.Instance.carVolume = b;
     }
 }

@@ -29,5 +29,5 @@ public class MyAccount : ScriptableObject
 
     public InputType SelectedInputType=InputType.JoyStick;
 
-    public float[] Volume=new float[3];
+    public float carVolume;
 }
