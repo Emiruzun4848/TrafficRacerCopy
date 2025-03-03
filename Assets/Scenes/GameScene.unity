@@ -2085,6 +2085,7 @@ MonoBehaviour:
   horizontalSpeedIncreaseRate: 10
   maxHorizontalSpeed: 0
   breakRate: 5
+  rbVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &1683403749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2553,6 +2554,7 @@ MonoBehaviour:
   horizontalSpeedIncreaseRate: 2
   maxHorizontalSpeed: 0
   breakRate: 1
+  rbVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &1239556145147789851
 MonoBehaviour:
   m_ObjectHideFlags: 0

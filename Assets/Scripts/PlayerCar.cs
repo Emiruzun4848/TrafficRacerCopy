@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class PlayerCar : MonoBehaviour
@@ -20,10 +21,15 @@ public class PlayerCar : MonoBehaviour
     }
     private void Update()
     {
-        #region PointSystem
-        GameManager.Instance.Point += Time.deltaTime * pointKatsayisi * playerMovement.rb.velocity.z;
-        #endregion
-        GameManager.Instance.Money += Time.deltaTime * playerMovement.rb.velocity.z * moneyRate * 0.01f;
+        if (GameManager.Instance.isGameEnded)
+            return;
+        if (playerMovement.rb.velocity.z >= 60)
+        {
+            #region PointSystem
+            GameManager.Instance.Point += Time.deltaTime * pointKatsayisi * playerMovement.rb.velocity.z;
+            #endregion
+            GameManager.Instance.Money += Time.deltaTime * playerMovement.rb.velocity.z * moneyRate * 0.01f;
+        }
     }
     void UpdateCarPrefab()
     {
@@ -45,7 +51,9 @@ public class PlayerCar : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (triggeredCars.Contains(other.transform) || playerMovement.rb.velocity.z < 80f)
+        if (GameManager.Instance.isGameEnded)
+            return;
+        if (triggeredCars.Contains(other.transform) || playerMovement.rb.velocity.z < 100f)
             return;
         triggeredCars.Add(other.transform);
         GameManager.Instance.Point += 125f;
@@ -54,6 +62,23 @@ public class PlayerCar : MonoBehaviour
         iPos.y = 10f;
         GameObject iDelete = Instantiate(pointUpgrade, iPos, pointUpgrade.transform.rotation);
         Destroy(iDelete, 0.5f);
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        if (GameManager.Instance.isGameEnded)
+            return;
+        Debug.Log($"{col.gameObject.name} Çarptı. {playerMovement.rbVelocity.z}");
+        if (col.gameObject.CompareTag("NPC"))
+        {
+            col.gameObject.GetComponent<CarAI>().Crash();
+            if (playerMovement.rbVelocity.z > 90f)
+            {
+                GameManager.Instance.GameOver();
+            }
+
+
+
+        }
     }
 
 }

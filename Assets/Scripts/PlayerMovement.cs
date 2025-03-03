@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public float speedIncreaseRate;
     public float horizontalSpeedIncreaseRate;
     public int maxHorizontalSpeed;
-    public float breakRate=1f;
+    public float breakRate = 1f;
+    public Vector3 rbVelocity;
 
     private void Awake()
     {
@@ -24,7 +25,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 rbVelocity = rb.velocity;
+        if (GameManager.Instance.isGameEnded)
+            return;
+
+        Move();
+
+    }
+    private void Move()
+    {
+        
+        rbVelocity = rb.velocity;
         rbVelocity.y = 0;
 
         if (rbVelocity.x * input.x < 0)
@@ -55,5 +65,9 @@ public class PlayerMovement : MonoBehaviour
         rbVelocity.x = Mathf.Clamp(rbVelocity.x, -mXVelo, mXVelo);
 
         rb.velocity = rbVelocity;
+    }
+    public void CrashedCar()
+    {
+        Destroy(rb);
     }
 }

@@ -20,6 +20,10 @@ public class AudioScript : MonoBehaviour
     }
     private void Update()
     {
+        if(GameManager.Instance.isGameEnded){
+            carSource.Stop();
+            return;
+        }
         if (playerMovement == null)
         {
             playerMovement = GameObject.FindAnyObjectByType<PlayerMovement>();

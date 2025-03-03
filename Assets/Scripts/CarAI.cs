@@ -51,7 +51,7 @@ public class CarAI : MonoBehaviour
                     speed = Mathf.Clamp(((speed / baseSpeed) - (0.02f * Time.deltaTime * 50f)) * baseSpeed, 0, baseSpeed);
                 }
             }
-            else if (obj.GetComponent<PlayerCar>())
+            else if (obj.GetComponent<PlayerCar>() && !GameManager.Instance.isGameEnded)
             {
                 baseSpeed = obj.GetComponent<PlayerMovement>().rb.velocity.z;
             }
@@ -81,6 +81,48 @@ public class CarAI : MonoBehaviour
             manager.passiveCars.Add(gameObject);
             PlayerCar.triggeredCars.Remove(transform);
         }
+    }
+    private void OnEnable()
+    {
+        Component[] cols = GetComponents<Collider>();
+        foreach (Collider item in cols)
+        {
+            item.enabled = true;
+        }
+        foreach (Transform item in transform)
+        {
+        item.gameObject.SetActive(true);
+        }
+    }
+    public void Crash()
+    {
+        Invoke(nameof(Crashed), 0.3f);
+    }
+    void Crashed()
+    {
+        baseSpeed = 5f;
+        Component[] cols = GetComponents<Collider>();
+        foreach (Collider item in cols)
+        {
+            item.enabled = false;
+        }
+        int number =6;
+        for (int i = 0; i < number; i++)
+        {
+            Invoke(nameof(CloseOpen), 0.2f * i);
+        }
+        Invoke(nameof(Disabled), 0.2f * number);
+    }
+    void CloseOpen()
+    {
+        foreach (Transform item in transform)
+        {
+        item.gameObject.SetActive(!item.gameObject.activeSelf);
+        }
+    }
+    void Disabled()
+    {
+        gameObject.SetActive(false);
     }
 
 }

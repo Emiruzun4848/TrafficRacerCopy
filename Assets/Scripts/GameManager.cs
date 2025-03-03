@@ -84,12 +84,15 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if(isGameEnded)
+            return;
         speedText.text = $"{((int)playerRb.velocity.z).ToString()} KM/H";
     }
     public void GameOver()
     {
-        MyAccount.Instance.Money += (int)Money;
+        MyAccount.Instance.Money = (int)Money;
         isGameEnded = true;
+        PlayerMovement.Instance.CrashedCar();
 
     }
 }
