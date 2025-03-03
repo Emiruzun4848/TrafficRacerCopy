@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour
         }
         Instance = this;
         playerInput = new InputsSystem();
-        
+
         playerInput.PlayerMovement.Enable();
     }
     void Start()
@@ -45,7 +45,13 @@ public class InputManager : MonoBehaviour
         if (playerInput != null)
             playerInput.Disable();
     }
-
+    private void OnDestroy()
+    {
+        {
+            if (playerInput != null)
+                playerInput.Disable();
+        }
+    }
     #endregion
 
 

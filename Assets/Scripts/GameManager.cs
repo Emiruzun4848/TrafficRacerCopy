@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public Rigidbody playerRb;
     public bool isGameEnded;
+    [SerializeField] Transform inputs;
 
     private void Awake()
     {
@@ -28,8 +29,26 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         Money += MyAccount.Instance.Money;
+        LoadInputSystem(MyAccount.Instance.SelectedInputType);
     }
-
+    void LoadInputSystem(InputType type)
+    {
+        if (type == InputType.Keyboard)
+        {
+            inputs.GetChild(0).gameObject.SetActive(false);
+            inputs.GetChild(1).gameObject.SetActive(false);
+        }
+        else if (type == InputType.JoyStick)
+        {
+            inputs.GetChild(0).gameObject.SetActive(true);
+            inputs.GetChild(1).gameObject.SetActive(false);
+        }
+        else
+        {
+            inputs.GetChild(0).gameObject.SetActive(false);
+            inputs.GetChild(1).gameObject.SetActive(true);
+        }
+    }
     private void Start()
     {
         playerRb = GameObject.FindAnyObjectByType<PlayerMovement>().rb;

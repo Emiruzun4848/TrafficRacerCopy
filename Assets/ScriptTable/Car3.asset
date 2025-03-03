@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef701b7ad9066941a5bcc445bbed564, type: 3}
   m_Name: Car3
   m_EditorClassIdentifier: 
-  cost: 10000
-  isBought: 1
+  cost: 50000
+  isBought: 0
   maxSpeed: 5e01000090010000c201000026020000
   speedIncreaseRate:
   - 2
@@ -27,10 +27,10 @@ MonoBehaviour:
   - 4.5
   - 5
   breakRate:
-  - 3.5
-  - 4
   - 5
-  - 6
-  UpgradeLevel: 3
-  UpgradeCost: b80b0000a60e000094110000
+  - 7
+  - 9
+  - 12
+  UpgradeLevel: 0
+  UpgradeCost: 10270000983a0000204e0000
   carPrefab: {fileID: 4121813311797964727, guid: 283420babadc92e45a1aa8afb7b5b8d2, type: 3}

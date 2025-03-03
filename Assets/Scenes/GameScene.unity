@@ -462,8 +462,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2079961484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.8444792, y: 0.093}
-  m_AnchorMax: {x: 0.9480001, y: 0.279}
+  m_AnchorMin: {x: 0.8187941, y: 0.04573664}
+  m_AnchorMax: {x: 0.97400004, y: 0.32611614}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1206,10 +1206,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2079961484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.050520834, y: 0.093}
-  m_AnchorMax: {x: 0.1556875, y: 0.27800003}
-  m_AnchoredPosition: {x: 0.5, y: 0}
-  m_SizeDelta: {x: 1, y: 0}
+  m_AnchorMin: {x: 0.025, y: 0.046662975}
+  m_AnchorMax: {x: 0.18100001, y: 0.3251898}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1228779859
 MonoBehaviour:
@@ -1813,6 +1813,7 @@ MonoBehaviour:
   moneyText: {fileID: 2004310022}
   playerRb: {fileID: 0}
   isGameEnded: 0
+  inputs: {fileID: 32997984}
 --- !u!4 &1594330467
 Transform:
   m_ObjectHideFlags: 0

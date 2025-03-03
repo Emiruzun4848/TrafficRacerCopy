@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ButtonControl : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class ButtonControl : MonoBehaviour
     void OnDisable()
     {
         InputManager.Instance.gameObject.SetActive(true);
+        PlayerMovement.Instance.input = Vector2.zero;
     }
 
 }
