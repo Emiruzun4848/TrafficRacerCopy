@@ -54,16 +54,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         playerRb = GameObject.FindAnyObjectByType<PlayerMovement>().rb;
-        InvokeRepeating(nameof(SetRepeatMoney), 1f, 3f);
     }
 
-    public void SetRepeatMoney()
-    {
-        if (!isGameEnded)
-        {
-            MyAccount.Instance.Money = (int)Money;
-        }
-    }
     public float Point
     {
         get { return point; }
