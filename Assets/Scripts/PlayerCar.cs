@@ -26,9 +26,9 @@ public class PlayerCar : MonoBehaviour
         if (playerMovement.rb.velocity.z >= 60)
         {
             #region PointSystem
-            GameManager.Instance.Point += Time.deltaTime * pointKatsayisi * playerMovement.rb.velocity.z;
+            GameManager.Instance.Point += Time.deltaTime * pointKatsayisi * playerMovement.rb.velocity.z * 0.1f;
             #endregion
-            GameManager.Instance.Money += Time.deltaTime * playerMovement.rb.velocity.z * moneyRate * 0.01f;
+            GameManager.Instance.Money += Time.deltaTime * playerMovement.rb.velocity.z * moneyRate * 0.003f;
         }
     }
     void UpdateCarPrefab()
@@ -37,10 +37,7 @@ public class PlayerCar : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
-        Vector3 pos = transform.position;
-        pos.y = carData.carPrefab.transform.position.y;
-        pos.z = carData.carPrefab.transform.position.z;
-        Instantiate(carData.carPrefab, pos, carData.carPrefab.transform.rotation, transform);
+        Instantiate(carData.carPrefab, transform.position, carData.carPrefab.transform.rotation, transform);
 
         playerMovement.maxSpeed = carData.maxSpeed[Mathf.Clamp(carData.UpgradeLevel, 0, carData.maxSpeed.Length - 1)];
         playerMovement.speedIncreaseRate = carData.speedIncreaseRate[Mathf.Clamp(carData.UpgradeLevel, 0, carData.speedIncreaseRate.Length - 1)];

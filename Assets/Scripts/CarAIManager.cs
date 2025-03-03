@@ -56,7 +56,7 @@ public class CarAIManager : MonoBehaviour
     private void Start()
     {
         playerCar = GameObject.FindAnyObjectByType<PlayerCar>();
-        place = 150;
+        place = 350;
         UpdateCars();
     }
     private void Update()
