@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7782def17e7e2e479d73eb6b33f611b, type: 3}
   m_Name: MyAccount
   m_EditorClassIdentifier: 
-  Money: 999665
-  HighScore: 0
-  SelectedCar: {fileID: 11400000, guid: adcbf71d82ef79548944c80f082e56c5, type: 2}
-  SelectedInputType: 3
+  Money: 684
+  HighScore: 209
+  SelectedCar: {fileID: 11400000, guid: 7d6294189af5afb47960ab2879c1613a, type: 2}
+  SelectedInputType: 0
   carVolume: 0

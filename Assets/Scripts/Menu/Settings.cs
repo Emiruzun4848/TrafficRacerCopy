@@ -1,8 +1,14 @@
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
+    [SerializeField] Slider carVolumeSlider;
+    void Start()
+    {
+        carVolumeSlider.value = MyAccount.Instance.carVolume;
+    }
     public void ChangeInputType(int a)
     {
         switch (a)
@@ -24,9 +30,11 @@ public class Settings : MonoBehaviour
 #endif
                 break;
         }
+        SetInf.Instance.Set();
     }
     public void ChangeSound(float b)
     {
         MyAccount.Instance.carVolume = b;
+        SetInf.Instance.Set();
     }
 }

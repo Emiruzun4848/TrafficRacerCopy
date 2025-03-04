@@ -155,7 +155,7 @@ public class StoreMenu : MonoBehaviour
         if (_cardata.maxSpeed != null && _cardata.maxSpeed.Length > 0)
         {
             control = Mathf.Clamp(level, 0, _cardata.maxSpeed.Length - 1);
-            statMaxSpeed.GetChild(_index).GetComponent<Slider>().value = CalculateStats(_cardata.maxSpeed[control], 100f, 1000f);
+            statMaxSpeed.GetChild(_index).GetComponent<Slider>().value = CalculateStats(_cardata.maxSpeed[control], 80f, 550f);
         }
 
         if (_cardata.speedIncreaseRate != null && _cardata.speedIncreaseRate.Length > 0)
@@ -167,7 +167,7 @@ public class StoreMenu : MonoBehaviour
         if (_cardata.breakRate != null && _cardata.breakRate.Length > 0)
         {
             control = Mathf.Clamp(level, 0, _cardata.breakRate.Length - 1);
-            statBreakeRate.GetChild(_index).GetComponent<Slider>().value = CalculateStats(_cardata.breakRate[control], 1f, 50f);
+            statBreakeRate.GetChild(_index).GetComponent<Slider>().value = CalculateStats(_cardata.breakRate[control], 1f, 15f);
         }
 
         if (_cardata.maxHorizontalSpeed != null && _cardata.maxHorizontalSpeed.Length > 0)
@@ -198,6 +198,7 @@ public class StoreMenu : MonoBehaviour
         }
         UpdateMoney();
         Load();
+        SetInf.Instance.Set();
     }
     public void ChangeCar(bool right)
     {
@@ -214,6 +215,7 @@ public class StoreMenu : MonoBehaviour
                 index = cars.Length - 1;
         }
         Load();
+        SetInf.Instance.Set();
     }
     public void BuyCar(CarData _car)
     {
@@ -225,6 +227,7 @@ public class StoreMenu : MonoBehaviour
             Load();
         }
         UpdateMoney();
+        SetInf.Instance.Set();
     }
     void UpdateMoney()
     {

@@ -27,10 +27,10 @@ MonoBehaviour:
   - 4.5
   - 5
   breakRate:
-  - 5
-  - 7
-  - 9
-  - 12
+  - 6
+  - 8
+  - 10
+  - 15
   UpgradeLevel: 0
-  UpgradeCost: 10270000983a0000204e0000
+  UpgradeCost: 50c30000f8240100a0860100
   carPrefab: {fileID: 4121813311797964727, guid: 283420babadc92e45a1aa8afb7b5b8d2, type: 3}

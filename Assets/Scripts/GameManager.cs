@@ -36,9 +36,15 @@ public class GameManager : MonoBehaviour
     {
         if (type == InputType.Keyboard)
         {
+            #if UNITY_ANDROID && !UNITY_EDITOR
+            MyAccount.Instance.SelectedInputType = InputType.Button;
+            LoadInputSystem(InputType.Button);
+            return;
+            #else
             inputs.GetChild(0).gameObject.SetActive(false);
             inputs.GetChild(1).gameObject.SetActive(false);
             inputs.GetChild(2).gameObject.SetActive(false);
+            #endif
         }
         else if (type == InputType.JoyStick)
         {
@@ -54,15 +60,15 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            #if UNITY_ANDROID
+            #if UNITY_ANDROID && !UNITY_EDITOR
             inputs.GetChild(0).gameObject.SetActive(false);
             inputs.GetChild(1).gameObject.SetActive(false);
             inputs.GetChild(2).gameObject.SetActive(true);
 
             #else
-            MyAccount.instance.SelectedInputType = InputType.Keyboard;
+            MyAccount.Instance.SelectedInputType = InputType.Keyboard;
             LoadInputSystem(InputType.Keyboard);
-            
+            return;
             #endif
         }
     }
@@ -99,13 +105,15 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        MyAccount.Instance.Money = (int)Money;
         isGameEnded = true;
         PlayerMovement.Instance.CrashedCar();
         if ((int)point > MyAccount.Instance.HighScore)
         {
             MyAccount.Instance.HighScore = (int)point;
         }
+        MyAccount.Instance.Money = (int)Money;
+        SetInf.Instance.Set();
+        
         gameOverScene.Open();
         gameOverScene.LoadText($"${money.ToString("N0", new System.Globalization.CultureInfo("de-DE"))}", ((int)point).ToString(), MyAccount.Instance.HighScore.ToString());
 
