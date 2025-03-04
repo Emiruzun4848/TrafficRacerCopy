@@ -17,7 +17,11 @@ public class Settings : MonoBehaviour
                 MyAccount.Instance.SelectedInputType = InputType.Button;
                 break;
             case 3:
+#if UNITY_ANDROID
                 MyAccount.Instance.SelectedInputType = InputType.Tilt;
+#else
+                MyAccount.Instance.SelectedInputType = InputType.Keyboard;
+#endif
                 break;
         }
     }

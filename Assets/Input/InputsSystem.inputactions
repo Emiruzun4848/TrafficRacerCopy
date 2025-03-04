@@ -83,6 +83,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "AccelerometerInput",
+            "id": "eff03381-2f5c-4ceb-9b94-0ba74a1069d1",
+            "actions": [
+                {
+                    "name": "Accelerometerss",
+                    "type": "Value",
+                    "id": "c77e58f7-35a0-42c8-9335-c43c83d11b42",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e259d831-8dda-4643-9e10-10a24f82edb3",
+                    "path": "<Accelerometer>/acceleration",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerometerss",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

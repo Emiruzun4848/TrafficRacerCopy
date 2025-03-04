@@ -1,6 +1,5 @@
 using System;
 using TMPro;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -55,10 +54,16 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
+            #if UNITY_ANDROID
             inputs.GetChild(0).gameObject.SetActive(false);
             inputs.GetChild(1).gameObject.SetActive(false);
             inputs.GetChild(2).gameObject.SetActive(true);
+
+            #else
+            MyAccount.instance.SelectedInputType = InputType.Keyboard;
+            LoadInputSystem(InputType.Keyboard);
+            
+            #endif
         }
     }
     private void Start()

@@ -105,6 +105,34 @@ public partial class @InputsSystem: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""AccelerometerInput"",
+            ""id"": ""eff03381-2f5c-4ceb-9b94-0ba74a1069d1"",
+            ""actions"": [
+                {
+                    ""name"": ""Accelerometerss"",
+                    ""type"": ""Value"",
+                    ""id"": ""c77e58f7-35a0-42c8-9335-c43c83d11b42"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e259d831-8dda-4643-9e10-10a24f82edb3"",
+                    ""path"": ""<Accelerometer>/acceleration"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerometerss"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -112,11 +140,15 @@ public partial class @InputsSystem: IInputActionCollection2, IDisposable
         // PlayerMovement
         m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
+        // AccelerometerInput
+        m_AccelerometerInput = asset.FindActionMap("AccelerometerInput", throwIfNotFound: true);
+        m_AccelerometerInput_Accelerometerss = m_AccelerometerInput.FindAction("Accelerometerss", throwIfNotFound: true);
     }
 
     ~@InputsSystem()
     {
         UnityEngine.Debug.Assert(!m_PlayerMovement.enabled, "This will cause a leak and performance issues, InputsSystem.PlayerMovement.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_AccelerometerInput.enabled, "This will cause a leak and performance issues, InputsSystem.AccelerometerInput.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -220,8 +252,58 @@ public partial class @InputsSystem: IInputActionCollection2, IDisposable
         }
     }
     public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
+
+    // AccelerometerInput
+    private readonly InputActionMap m_AccelerometerInput;
+    private List<IAccelerometerInputActions> m_AccelerometerInputActionsCallbackInterfaces = new List<IAccelerometerInputActions>();
+    private readonly InputAction m_AccelerometerInput_Accelerometerss;
+    public struct AccelerometerInputActions
+    {
+        private @InputsSystem m_Wrapper;
+        public AccelerometerInputActions(@InputsSystem wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Accelerometerss => m_Wrapper.m_AccelerometerInput_Accelerometerss;
+        public InputActionMap Get() { return m_Wrapper.m_AccelerometerInput; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(AccelerometerInputActions set) { return set.Get(); }
+        public void AddCallbacks(IAccelerometerInputActions instance)
+        {
+            if (instance == null || m_Wrapper.m_AccelerometerInputActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_AccelerometerInputActionsCallbackInterfaces.Add(instance);
+            @Accelerometerss.started += instance.OnAccelerometerss;
+            @Accelerometerss.performed += instance.OnAccelerometerss;
+            @Accelerometerss.canceled += instance.OnAccelerometerss;
+        }
+
+        private void UnregisterCallbacks(IAccelerometerInputActions instance)
+        {
+            @Accelerometerss.started -= instance.OnAccelerometerss;
+            @Accelerometerss.performed -= instance.OnAccelerometerss;
+            @Accelerometerss.canceled -= instance.OnAccelerometerss;
+        }
+
+        public void RemoveCallbacks(IAccelerometerInputActions instance)
+        {
+            if (m_Wrapper.m_AccelerometerInputActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IAccelerometerInputActions instance)
+        {
+            foreach (var item in m_Wrapper.m_AccelerometerInputActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_AccelerometerInputActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public AccelerometerInputActions @AccelerometerInput => new AccelerometerInputActions(this);
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
+    }
+    public interface IAccelerometerInputActions
+    {
+        void OnAccelerometerss(InputAction.CallbackContext context);
     }
 }

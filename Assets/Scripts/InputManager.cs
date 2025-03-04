@@ -37,19 +37,28 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         if (playerInput != null)
+        {
+            playerInput.PlayerMovement.Enable();
             playerInput.Enable();
+        }
     }
 
     private void OnDisable()
     {
         if (playerInput != null)
+        {
+            playerInput.PlayerMovement.Disable();
             playerInput.Disable();
+        }
     }
     private void OnDestroy()
     {
         {
             if (playerInput != null)
+            {
+                playerInput.PlayerMovement.Disable();
                 playerInput.Disable();
+            }
         }
     }
     #endregion

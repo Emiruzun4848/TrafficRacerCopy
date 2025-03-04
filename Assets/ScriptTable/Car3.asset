@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Car3
   m_EditorClassIdentifier: 
   cost: 50000
-  isBought: 1
+  isBought: 0
   maxSpeed: 5e01000090010000c201000026020000
   speedIncreaseRate:
   - 2

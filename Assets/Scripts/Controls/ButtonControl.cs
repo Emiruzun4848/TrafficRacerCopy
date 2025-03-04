@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 public class ButtonControl : MonoBehaviour
 {
-    bool r, l, b;
+    bool r, l;
+    bool b=false;
     public void RightClick(bool x)
     {
         r = x;
